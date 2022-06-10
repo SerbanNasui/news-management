@@ -51,7 +51,7 @@
                         <li class="nav-item">
                             <a href="{{ route('categories.index') }}" class="nav-link @if(\Request::routeIs('categories.*')) active @endif">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Create Category</p>
+                                <p>Categories</p>
                             </a>
                         </li>
                     </ul>

@@ -64,9 +64,7 @@
                                             @endif
                                         </td>
                                         <td>{{ $article->title }}</td>
-                                        @can('users-management')
-                                            <td>{{ $article->user->name }}</td>
-                                        @endcan
+                                        <td>{{ $article->user->name }}</td>
                                         <td>{{ $article->category->name }}</td>
                                         <td>
                                             <input data-id="{{$article->id}}" class="toggle-class" type="checkbox" data-onstyle="success"
