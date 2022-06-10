@@ -52,14 +52,14 @@
                                         <td>
                                             <a href="{{ route('roles.show',$role->id) }}" class="btn btn-primary">
                                                 <i class="fas fa-edit"></i>
-                                                Edit
+
                                             </a>
                                             <form action="{{ route('roles.destroy',$role->id) }}" method="post" class="d-inline">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger">
                                                     <i class="fas fa-trash"></i>
-                                                    Delete
+
                                                 </button>
                                             </form>
                                         </td>

@@ -60,16 +60,14 @@
                                         <td>{{ $category->created_at }}</td>
                                         <td>{{ $category->updated_at }}</td>
                                         <td>
-                                            <a href="{{ route('categories.show', $category->id) }}" class="btn btn-primary">
+                                            <a href="{{ route('categories.show', $category->id) }}" class="btn btn-primary btn-sm">
                                                 <i class="fas fa-edit"></i>
-                                                Edit
                                             </a>
-                                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="d-inline">
+                                            <form action="{{ route('categories.destroy', $category->id) }}" method="post" class="d-inline">
                                                 @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">
+                                                @method('delete')
+                                                <button type="submit" class="btn btn-danger btn-sm">
                                                     <i class="fas fa-trash"></i>
-                                                    Delete
                                                 </button>
                                             </form>
                                         </td>

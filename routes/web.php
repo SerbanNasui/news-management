@@ -32,8 +32,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::get('/create', [UserController::class, 'create'])->name('create');
             Route::post('/store', [UserController::class, 'store'])->name('store');
             Route::get('/{id}', [UserController::class, 'show'])->name('show');
-            Route::post('/{id}', [UserController::class, 'update'])->name('update');
-            Route::delete('/{id}', [UserController::class, 'destroy'])->name('destroy');
+            Route::post('update/{id}', [UserController::class, 'update'])->name('update');
+            Route::delete('delete/{id}', [UserController::class, 'destroy'])->name('destroy');
         });
 
         Route::group(['prefix' => 'roles', 'as'=>'roles.'], function () {
@@ -41,14 +41,17 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::get('/create', [RoleController::class, 'create'])->name('create');
             Route::post('/store', [RoleController::class, 'store'])->name('store');
             Route::get('/{id}', [RoleController::class, 'show'])->name('show');
-            Route::post('/{id}', [RoleController::class, 'update'])->name('update');
-            Route::delete('/{id}', [RoleController::class, 'destroy'])->name('destroy');
+            Route::post('update/{id}', [RoleController::class, 'update'])->name('update');
+            Route::delete('delete/{id}', [RoleController::class, 'destroy'])->name('destroy');
         });
 
         Route::group(['prefix' => 'news', 'as' => 'news.'], function(){
             Route::get('/',[ArticleController::class, 'index'])->name('index');
             Route::get('/create', [ArticleController::class, 'create'])->name('create');
             Route::post('/store', [ArticleController::class, 'store'])->name('store');
+            Route::get('/{id}', [ArticleController::class, 'show'])->name('show');
+            Route::post('update/{id}', [ArticleController::class, 'update'])->name('update');
+            Route::delete('delete/{id}', [ArticleController::class, 'destroy'])->name('destroy');
         });
 
         Route::group(['prefix' => 'categories', 'as' => 'categories.'], function(){
@@ -56,8 +59,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::get('/create', [CategoryController::class, 'create'])->name('create');
             Route::post('/store', [CategoryController::class, 'store'])->name('store');
             Route::get('/{id}', [CategoryController::class, 'show'])->name('show');
-            Route::post('/{id}', [CategoryController::class, 'update'])->name('update');
-            Route::delete('/{id}', [CategoryController::class, 'destroy'])->name('destroy');
+            Route::post('update/{id}', [CategoryController::class, 'update'])->name('update');
+            Route::delete('delete/{id}', [CategoryController::class, 'destroy'])->name('destroy');
         });
 
         Route::group(['prefix' => 'manage-news', 'as' => 'manage.news.'], function(){

@@ -49,4 +49,46 @@ class ArticleController extends Controller
         toastr()->success('Article created successfully');
         return redirect()->route('news.index');
     }
+
+    public function show($id){
+        $article = Article::findOrFail($id);
+        $categories = Category::all();
+        return view('back-office.articles.show', compact('article', 'categories'));
+    }
+
+    public function update(Request $request, $id){
+        $article = Article::findOrFail($id);
+        $request->validate([
+            'title' => 'required|min:3',
+            'body' => 'required|min:3',
+            'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20000|dimensions:min_width=10,min_height=10',
+            'category_id' => 'required|exists:categories,id',
+        ]);
+
+        $author = auth()->user();
+        $slug = strtolower(str_replace(' ', '-', $request->title)).'-'.$author->id.'-'.Carbon::now()->timestamp;
+        if($request->hasFile('thumbnail')) {
+            $imageName = (new UploadImageService())->uploadThumbnail($request, $slug, $author);
+        }else{
+            $imageName = $article->thumbnail;
+        }
+
+        $article->update([
+            'title' => $request->title,
+            'body' => $request->body,
+            'slug' => $slug,
+            'thumbnail' => $imageName,
+            'category_id' => $request->category_id,
+        ]);
+
+        toastr()->success('Article updated successfully');
+        return redirect()->route('news.index');
+    }
+
+    public function destroy($id){
+        $article = Article::findOrFail($id);
+        $article->delete();
+        toastr()->success('Article deleted successfully');
+        return redirect()->route('news.index');
+    }
 }
