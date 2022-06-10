@@ -4,12 +4,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">News</h1>
+                    <h1 class="m-0">Categories</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('backoffice.index') }}">Home</a></li>
-                        <li class="breadcrumb-item active">News</li>
+                        <li class="breadcrumb-item active">Categories</li>
                     </ol>
                 </div>
             </div>
@@ -21,53 +21,56 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Articles</h3>
+                            <h3 class="card-title">Categories</h3>
+                            <div class="card-tools">
+                                <a href="{{ route('categories.create') }}" class="btn btn-primary">
+                                    <i class="fas fa-plus"></i>
+                                    Add Category
+                                </a>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <table id="articles_table" class="table table-bordered table-striped">
+                            <table id="categories_table" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
+                                    <th>ID</th>
                                     <th>Thumbnail</th>
-                                    <th>Title</th>
-                                    @can('users-management')
-                                        <th>Author</th>
-                                    @endcan
-                                    <th>Category</th>
-                                    <th>Published</th>
-                                    <th>Created at</th>
-                                    <th>Updated at</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Articles</th>
+                                    <th>Created At</th>
+                                    <th>Updated At</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($articles as $article)
-                                        <tr>
-                                            <td>
-                                                @if($article->thumbnail)
-                                                    <img src="{{ asset('storage/thumbnails/' . $article->thumbnail) }}" alt="{{ $article->title }}" class="img-fluid" style="max-width: 50px;">
-                                                @else
-                                                    <img src="{{ asset('images/thumbnail-default.png') }}" alt="{{ $article->slug }}" class="img-fluid" style="max-width: 50px;">
-                                                @endif
-                                            </td>
-                                            <td>{{ $article->title }}</td>
-                                            @can('users-management')
-                                                <td>{{ $article->user->name }}</td>
-                                            @endcan
-                                            <td>{{ $article->category->name }}</td>
-                                            <td>
-                                                @if($article->published)
-                                                    <span class="badge badge-success">Published</span>
-                                                @else
-                                                    <span class="badge badge-danger">Unpublished</span>
-                                                @endif
-                                            </td>
-                                            <td data-toggle="tooltip" data-placement="top" title="{{ $article->created_at->diffForHumans() }}">{{ $article->created_at }}</td>
-                                            <td data-toggle="tooltip" data-placement="top" title="{{ $article->updated_at->diffForHumans() }}">{{ $article->updated_at }}</td>
-                                            <td>
-                                                act
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                @foreach($categories as $category)
+                                    <tr>
+                                        <td>{{ $category->id }}</td>
+                                        <th>
+                                            @if($category->image)
+                                                <img src="{{ asset('storage/thumbnails/' . $category->thumbnail) }}" alt="{{ $category->title }}" class="img-fluid" style="max-width: 50px;">
+                                            @else
+                                                <img src="{{ asset('images/thumbnail-default.png') }}" alt="{{ $category->slug }}" class="img-fluid" style="max-width: 50px;">
+                                            @endif
+                                        </th>
+                                        <td>{{ $category->name }}</td>
+                                        <td>{{ $category->description }}</td>
+                                        <td>{{ $category->articles->count() }}</td>
+                                        <td>{{ $category->created_at }}</td>
+                                        <td>{{ $category->updated_at }}</td>
+                                        <td>
+                                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -85,6 +88,7 @@
     <link rel="stylesheet" href="{{ asset('admin-lte/dist/css/adminlte.min.css') }}">
 @endpush
 @push('scripts')
+
     <script src="{{ asset('admin-lte/plugins/jquery/jquery.min.js') }}'"></script>
     <script src="{{ asset('admin-lte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>>
     <script src="{{ asset('admin-lte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -102,12 +106,9 @@
 
     <script>
         $(document).ready(function () {
-            $('#articles_table').DataTable({
+            $('#categories_table').DataTable({
                 "order": [[0, "asc"]],
             });
         });
-        $(function () {
-            $('[data-toggle="tooltip"]').tooltip()
-        })
     </script>
 @endpush

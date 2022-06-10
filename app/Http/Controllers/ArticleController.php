@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Category;
 use App\Services\UploadImageService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -16,7 +17,8 @@ class ArticleController extends Controller
     }
 
     public function create(){
-        return view('back-office.articles.create');
+        $categories = Category::all();
+        return view('back-office.articles.create', compact('categories'));
     }
 
     public function store(Request $request){
@@ -24,18 +26,24 @@ class ArticleController extends Controller
             'title' => 'required|min:3',
             'body' => 'required|min:3',
             'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20000|dimensions:min_width=10,min_height=10',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
         $author = auth()->user();
         $slug = strtolower(str_replace(' ', '-', $request->title)).'-'.$author->id.'-'.Carbon::now()->timestamp;
-        $imageName = (new UploadImageService())->uploadThumbnail($request, $author, $slug);
+        if($request->hasFile('thumbnail')) {
+            $imageName = (new UploadImageService())->uploadThumbnail($request, $author, $slug);
+        }else{
+            $imageName = null;
+        }
 
         Article::create([
             'title' => $request->title,
             'body' => $request->body,
             'user_id' => $author->id,
             'slug' => $slug,
-            'thumbnail' => $imageName
+            'thumbnail' => $imageName,
+            'category_id' => $request->category_id,
         ]);
 
         toastr()->success('Article created successfully');

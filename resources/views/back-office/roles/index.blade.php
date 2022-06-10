@@ -100,7 +100,6 @@
 
     <script>
         $(document).ready(function () {
-            console.log('ready');
             $('#roles_table').DataTable({
                 "order": [[0, "asc"]],
             });

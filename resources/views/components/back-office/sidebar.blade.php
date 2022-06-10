@@ -39,6 +39,23 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item @if(\Request::routeIs('categories.*')) menu-open @endif">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-folder"></i>
+                        <p>
+                            Categoies
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('categories.index') }}" class="nav-link @if(\Request::routeIs('categories.*')) active @endif">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Create Category</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 @endcan
                 <li class="nav-item @if(\Request::routeIs('news.*')) menu-open @endif">
                     <a href="#" class="nav-link">

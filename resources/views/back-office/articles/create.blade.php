@@ -33,6 +33,20 @@
                                     @enderror
                                 </div>
                                 <div class="form-group">
+                                    <label for="name">Category</label>
+                                    <select name="category_id" id="category_id" class="form-control">
+                                        <option value="" selected disabled>Select a category</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="form-group">
                                     <textarea id="compose-textarea" name="body" class="form-control" style="height: 300px">
                                     </textarea>
                                 </div>
