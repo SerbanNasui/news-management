@@ -11,6 +11,6 @@ class HomeController extends Controller
     public function index()
     {
         $articles = Article::where('published', 1)->get();
-        return view('home', compact('articles'));
+        return view('client.home', compact('articles'));
     }
 }
