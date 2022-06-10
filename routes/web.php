@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,4 +18,14 @@ use App\Http\Controllers\DashboardController;
 Auth::routes(['register' => false]);
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('backoffice.index');
+
+Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('backoffice.index');
+
+    Route::group(['prefix' => 'users', 'as'=>'users.'], function () {
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/create', [UserController::class, 'create'])->name('create');
+        Route::post('/store', [UserController::class, 'store'])->name('store');
+    });
+});
+
