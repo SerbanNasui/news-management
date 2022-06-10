@@ -79,6 +79,7 @@ class ArticleController extends Controller
             'slug' => $slug,
             'thumbnail' => $imageName,
             'category_id' => $request->category_id,
+            'published' => 0
         ]);
 
         toastr()->success('Article updated successfully');

@@ -47,4 +47,10 @@ class User extends Authenticatable
         return $this->hasMany(Article::class);
     }
 
+    public function scopeWriters($query){
+        return $query->whereHas('roles', function($q){
+            $q->where('name', 'writer')->orWhere('name', 'admin');
+        });
+    }
+
 }

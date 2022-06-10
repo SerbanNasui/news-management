@@ -65,6 +65,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
 
         Route::group(['prefix' => 'manage-news', 'as' => 'manage.news.'], function(){
             Route::get('/',[ManageNewsController::class, 'index'])->name('index');
+            Route::get('/publish', [ManageNewsController::class, 'publishArticle'])->name('publish');
+            Route::post('/filter-by-writer', [ManageNewsController::class, 'filterByWriter'])->name('filter-by-writer');
         });
     });
 });
