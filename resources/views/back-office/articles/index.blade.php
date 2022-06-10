@@ -33,6 +33,7 @@
                                         <th>Author</th>
                                     @endcan
                                     <th>Category</th>
+                                    <th>Published</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                     <th>Actions</th>
@@ -43,7 +44,7 @@
                                         <tr>
                                             <td>
                                                 @if($article->thumbnail)
-                                                    <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="{{ $article->title }}" class="img-fluid" style="max-width: 50px;">
+                                                    <img src="{{ asset('storage/thumbnails/' . $article->thumbnail) }}" alt="{{ $article->title }}" class="img-fluid" style="max-width: 50px;">
                                                 @else
                                                     <img src="{{ asset('images/thumbnail-default.png') }}" alt="{{ $article->slug }}" class="img-fluid" style="max-width: 50px;">
                                                 @endif
@@ -53,6 +54,13 @@
                                                 <td>{{ $article->user->name }}</td>
                                             @endcan
                                             <td>Category</td>
+                                            <td>
+                                                @if($article->published)
+                                                    <span class="badge badge-success">Published</span>
+                                                @else
+                                                    <span class="badge badge-danger">Unpublished</span>
+                                                @endif
+                                            </td>
                                             <td data-toggle="tooltip" data-placement="top" title="{{ $article->created_at->diffForHumans() }}">{{ $article->created_at }}</td>
                                             <td data-toggle="tooltip" data-placement="top" title="{{ $article->updated_at->diffForHumans() }}">{{ $article->updated_at }}</td>
                                             <td>

@@ -21,7 +21,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('news.store') }}" method="post">
+                            <form action="{{ route('news.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Title</label>
@@ -35,6 +35,19 @@
                                 <div class="form-group">
                                     <textarea id="compose-textarea" name="body" class="form-control" style="height: 300px">
                                     </textarea>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="file" name="thumbnail" placeholder="Choose image" id="thumbnail">
+                                        @error('thumbnail')
+                                            <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mb-2">
+                                    <img id="preview-image-before-upload" src="" alt="" style="max-height: 250px;">
                                 </div>
 
                                 <div class="form-group">
@@ -77,5 +90,23 @@
                 ]
             })
         })
+
+        $(document).ready(function (e) {
+
+
+            $('#thumbnail').change(function(){
+
+                let reader = new FileReader();
+
+                reader.onload = (e) => {
+
+                    $('#preview-image-before-upload').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(this.files[0]);
+
+            });
+
+        });
     </script>
 @endpush
