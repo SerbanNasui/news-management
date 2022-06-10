@@ -52,11 +52,11 @@
                                         <td>{{ $user->created_at }}</td>
                                         <td>{{ $user->updated_at }}</td>
                                         <td>
-                                            <a href="" class="btn btn-primary">
+                                            <a href="{{ route('users.show',$user->id) }}" class="btn btn-primary">
                                                 <i class="fas fa-edit"></i>
                                                 Edit
                                             </a>
-                                            <form action="" method="post" class="d-inline">
+                                            <form action="{{ route('users.destroy',$user->id) }}" method="post" class="d-inline">
                                                 @csrf
                                                 @method('delete')
                                                 <button type="submit" class="btn btn-danger">
