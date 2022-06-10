@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -15,7 +16,8 @@ class UserController extends Controller
     }
 
     public function create(){
-        return view('back-office.users.create');
+        $roles = Role::all();
+        return view('back-office.users.create', compact('roles'));
     }
 
     public function store(Request $request){
@@ -23,6 +25,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'role' => 'required',
         ]);
 
         $user = User::create([
@@ -30,6 +33,7 @@ class UserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
+        $user->assignRole($request->role);
 
         toastr()->success('User created successfully!');
         return redirect()->route('users.index');
