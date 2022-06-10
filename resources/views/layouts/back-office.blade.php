@@ -30,6 +30,9 @@
 
     <x-back-office.footer></x-back-office.footer>
 </div>
+<form action="{{ route('logout') }}" id="logout-form" method="post">
+    @csrf
+</form>
 <script src="{{ asset('admin-lte/plugins/jquery/jquery.min.js') }}"></script>
 <script src="{{ asset('admin-lte/dist/js/adminlte.js') }}"></script>
 @stack('scripts')

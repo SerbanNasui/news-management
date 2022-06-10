@@ -62,6 +62,12 @@
                         </li>
                     </ul>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="nav-link">
+                        <i class="nav-icon fas fa-power-off text-red"></i>
+                        <p> {{ __('Logout') }} </p>
+                    </a>
+                </li>
             </ul>
         </nav>
     </div>

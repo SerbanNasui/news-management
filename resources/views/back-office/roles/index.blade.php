@@ -35,6 +35,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
+                                    <th>Users</th>
                                     <th>Created At</th>
                                     <th>Updated At</th>
                                     <th>Actions</th>
@@ -45,6 +46,7 @@
                                     <tr>
                                         <td>{{ $role->id }}</td>
                                         <td>{{ $role->name }}</td>
+                                        <td>{{ $role->users->count() }}</td>
                                         <td>{{ $role->created_at }}</td>
                                         <td>{{ $role->updated_at }}</td>
                                         <td>
