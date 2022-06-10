@@ -40,7 +40,7 @@ class PermissionsTableSeeder extends Seeder
             if ($route->getName() != null) {
                 if ($exceptions->contains($route->getName()) == false) {
                     $routeName = $route->getName();
-                    Permission::firstOrCreate(['name' => $route->getName()]);
+                    Permission::firstOrCreate(['name' => $route->getName()],['name' => $route->getName()]);
                 }
             }
 

@@ -39,7 +39,7 @@ class UserTableSeeder extends Seeder
             'password'=>Hash::make('secret'),
         ]);
 
-        $publisher1 = User::firstOrCreate(['email'=>'publisher@newsdirect.com'],[
+        $publisher1 = User::firstOrCreate(['email'=>'sara_smith@newsdirect.com'],[
             'name'=>'Sara Smith',
             'email'=>'sara_smith@newsdirect.com',
             'password'=>Hash::make('secret'),
