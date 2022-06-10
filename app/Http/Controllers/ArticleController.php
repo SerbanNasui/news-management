@@ -32,7 +32,7 @@ class ArticleController extends Controller
         $author = auth()->user();
         $slug = strtolower(str_replace(' ', '-', $request->title)).'-'.$author->id.'-'.Carbon::now()->timestamp;
         if($request->hasFile('thumbnail')) {
-            $imageName = (new UploadImageService())->uploadThumbnail($request, $author, $slug);
+            $imageName = (new UploadImageService())->uploadThumbnail($request, $slug, $author);
         }else{
             $imageName = null;
         }

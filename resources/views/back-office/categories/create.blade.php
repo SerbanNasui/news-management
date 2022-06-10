@@ -9,6 +9,7 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('backoffice.index') }}">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">Categories</a></li>
                         <li class="breadcrumb-item active">Create category</li>
                     </ol>
                 </div>
@@ -44,7 +45,7 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <input type="file" name="image" placeholder="Choose image" id="thumbnail">
+                                        <input type="file" name="image" placeholder="Choose image" id="image">
                                         @error('image')
                                             <div class="invalid-feedback d-block">{{ $message }}</div>
                                         @enderror

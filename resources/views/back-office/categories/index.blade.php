@@ -49,7 +49,7 @@
                                         <td>{{ $category->id }}</td>
                                         <th>
                                             @if($category->image)
-                                                <img src="{{ asset('storage/thumbnails/' . $category->thumbnail) }}" alt="{{ $category->title }}" class="img-fluid" style="max-width: 50px;">
+                                                <img src="{{ asset('storage/thumbnails/' . $category->image) }}" alt="{{ $category->title }}" class="img-fluid" style="max-width: 50px;">
                                             @else
                                                 <img src="{{ asset('images/thumbnail-default.png') }}" alt="{{ $category->slug }}" class="img-fluid" style="max-width: 50px;">
                                             @endif
@@ -60,6 +60,10 @@
                                         <td>{{ $category->created_at }}</td>
                                         <td>{{ $category->updated_at }}</td>
                                         <td>
+                                            <a href="{{ route('categories.show', $category->id) }}" class="btn btn-primary">
+                                                <i class="fas fa-edit"></i>
+                                                Edit
+                                            </a>
                                             <form action="{{ route('categories.destroy', $category->id) }}" method="POST" class="d-inline">
                                                 @csrf
                                                 @method('DELETE')

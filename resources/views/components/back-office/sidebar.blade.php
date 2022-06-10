@@ -57,7 +57,7 @@
                     </ul>
                 </li>
                 @endcan
-                <li class="nav-item @if(\Request::routeIs('news.*')) menu-open @endif">
+                <li class="nav-item @if(\Request::routeIs('news.*') || \Request::routeIs('manage.news.*')) menu-open @endif">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p>
@@ -82,12 +82,14 @@
                                 </a>
                             </li>
                         @endcan
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="fas fa-magnet nav-icon"></i>
-                                <p>Manage news</p>
-                            </a>
-                        </li>
+                        @can('manage.news.index')
+                            <li class="nav-item">
+                                <a href="{{ route('manage.news.index') }}" class="nav-link @if(\Request::routeIs('manage.news.*')) active @endif">
+                                    <i class="fas fa-magnet nav-icon"></i>
+                                    <p>Manage news</p>
+                                </a>
+                            </li>
+                        @endcan
                     </ul>
                 </li>
                 <li class="nav-item">

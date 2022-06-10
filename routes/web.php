@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ManageNewsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -57,6 +58,10 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::get('/{id}', [CategoryController::class, 'show'])->name('show');
             Route::post('/{id}', [CategoryController::class, 'update'])->name('update');
             Route::delete('/{id}', [CategoryController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::group(['prefix' => 'manage-news', 'as' => 'manage.news.'], function(){
+            Route::get('/',[ManageNewsController::class, 'index'])->name('index');
         });
     });
 });

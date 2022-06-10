@@ -7,10 +7,16 @@ use Illuminate\Http\Request;
 
 class UploadImageService{
 
-    public function uploadThumbnail(Request $request, $author, $slug){
+    public function uploadThumbnail(Request $request, $slug,$author=null){
 
-        $image = $request->file('thumbnail');
-        $input['thumbnail'] = 'thumbnail-'. $slug.'-'. $this->createFileName() . '.' . $image->getClientOriginalExtension();
+        if($author != null){
+            $image = $request->file('thumbnail');
+            $input['thumbnail'] = 'thumbnail-'. $slug.'-'.$author->id.'-'. $this->createFileName() . '.' . $image->getClientOriginalExtension();
+        }else{
+            $image = $request->file('image');
+            $input['thumbnail'] = 'thumbnail-'. $slug.'-'. $this->createFileName() . '.' . $image->getClientOriginalExtension();
+        }
+
 
         $imgFile = Image::make($image->getRealPath());
 
