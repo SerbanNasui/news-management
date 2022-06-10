@@ -19,10 +19,10 @@ class CheckPermissions
         $user = $request->user();
         $role = $user->roles->first();
 
-        if (!$role->getAllPermissions()->contains('name', $request->route()->getName())) {
-            toastr()->error('You are not authorized to access this page.');
-            return redirect()->back();
+        if ($role->getAllPermissions()->contains('name', $request->route()->getName()) || $user->hasRole('admin')) {
+            return $next($request);
         }
-        return $next($request);
+        toastr()->error('You are not authorized to access this page.');
+        return redirect()->back();
     }
 }

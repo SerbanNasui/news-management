@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ArticleController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -40,6 +41,12 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::get('/{id}', [RoleController::class, 'show'])->name('show');
             Route::post('/{id}', [RoleController::class, 'update'])->name('update');
             Route::delete('/{id}', [RoleController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::group(['prefix' => 'news', 'as' => 'news.'], function(){
+            Route::get('/',[ArticleController::class, 'index'])->name('index');
+            Route::get('/create', [ArticleController::class, 'create'])->name('create');
+            Route::post('/store', [ArticleController::class, 'store'])->name('store');
         });
     });
 });

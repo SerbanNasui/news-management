@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <a href="#" class="brand-link">
+    <a href="{{ route('backoffice.index') }}" class="brand-link">
         <img src="{{ asset('admin-lte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">AdminLTE 3</span>
+        <span class="brand-text font-weight-light">NewsDirect</span>
     </a>
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -9,12 +9,13 @@
                 <img src="{{ asset('admin-lte/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="{{ route('backoffice.index') }}" class="d-block">{{ auth()->user()->name }}</a>
             </div>
         </div>
 
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                @can('users-management')
                 <li class="nav-item @if(\Request::routeIs('users.*') || \Request::routeIs('roles.*')) menu-open @endif">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-user"></i>
@@ -38,8 +39,8 @@
                         </li>
                     </ul>
                 </li>
-
-                <li class="nav-item">
+                @endcan
+                <li class="nav-item @if(\Request::routeIs('news.*')) menu-open @endif">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-newspaper"></i>
                         <p>
@@ -48,12 +49,22 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="" class="nav-link">
-                                <i class="fas fa-plus nav-icon"></i>
-                                <p>Create News</p>
-                            </a>
-                        </li>
+                        @can('news.create')
+                            <li class="nav-item">
+                                <a href="{{ route('news.create') }}" class="nav-link @if(\Request::routeIs('news.create')) active @endif">
+                                    <i class="fas fa-plus nav-icon"></i>
+                                    <p>Create News</p>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('news.index')
+                            <li class="nav-item">
+                                <a href="{{ route('news.index') }}" class="nav-link @if(\Request::routeIs('news.index')) active @endif">
+                                    <i class="fas fa-clipboard nav-icon"></i>
+                                    <p>News list</p>
+                                </a>
+                            </li>
+                        @endcan
                         <li class="nav-item">
                             <a href="" class="nav-link">
                                 <i class="fas fa-magnet nav-icon"></i>

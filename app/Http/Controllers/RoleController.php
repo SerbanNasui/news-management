@@ -45,6 +45,10 @@ class RoleController extends Controller
             'permissions' => 'required',
         ]);
         $role = Role::findOrFail($id);
+        if($role->name == 'admin') {
+            toastr()->error('You cannot edit the admin role.');
+            return redirect()->back();
+        }
         $role->update([
             'name' => $request->name,
         ]);
@@ -57,6 +61,10 @@ class RoleController extends Controller
     public function destroy($id)
     {
         $role = Role::findOrFail($id);
+        if($role->users->count()>0){
+            toastr()->error('Role cannot be deleted as it is assigned to users.');
+            return redirect()->route('roles.index');
+        }
         $role->delete();
 
         toastr()->success('Role deleted successfully.');

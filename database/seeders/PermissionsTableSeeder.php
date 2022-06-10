@@ -30,6 +30,8 @@ class PermissionsTableSeeder extends Seeder
             'password.reset',
             'password.update',
             'password.confirm',
+            'home',
+            'backoffice.index',
         ];
 
         $exceptions = collect($exceptions);

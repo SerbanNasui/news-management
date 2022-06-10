@@ -28,7 +28,5 @@ class RoleTableSeeder extends Seeder
             'guard_name'=>'web',
         ]);
 
-        $permissions = Permission::all();
-        $admin->givePermissionTo($permissions);
     }
 }

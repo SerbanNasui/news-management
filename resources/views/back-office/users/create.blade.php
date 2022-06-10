@@ -30,18 +30,38 @@
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}">
+                                    @error('name')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
                                     <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}">
+                                    @error('email')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
                                     <input type="password" name="password" id="password" class="form-control">
+                                    @error('password')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="password_confirmation">Password Confirmation</label>
                                     <input type="password" name="password_confirmation" id="password_confirmation" class="form-control">
+                                    @error('password_confirmation')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="role">Role</label>
@@ -51,6 +71,11 @@
                                             <option value="{{ $role->id }}">{{ $role->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('role')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Create</button>

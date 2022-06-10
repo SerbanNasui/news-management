@@ -30,6 +30,11 @@
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input type="text" name="name" id="name" class="form-control" value="{{ $user->name }}">
+                                    @error('name')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email</label>
@@ -38,9 +43,16 @@
                                 <div class="form-group">
                                     <label for="role">Role</label>
                                     <select name="role" id="role" class="form-control">
-                                        <option value="admin">Admin</option>
-                                        <option value="user">User</option>
+                                        <option value="" disabled>Select a role</option>
+                                        @foreach($roles as $role)
+                                            <option value="{{ $role->id }}" @if($role->id == $user->roles->first()->id) selected @endif>{{ $role->name }}</option>
+                                        @endforeach
                                     </select>
+                                    @error('role')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary">Update</button>

@@ -25,6 +25,7 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password',
             'role' => 'required',
         ]);
 
@@ -41,13 +42,15 @@ class UserController extends Controller
 
     public function show($id){
         $user = User::findOrFail($id);
-        return view('back-office.users.show', compact('user'));
+        $roles = Role::all();
+        return view('back-office.users.show', compact('user', 'roles'));
     }
 
 
     public function update(Request $request, $id){
         $request->validate([
             'name' => 'required',
+            'role'  => 'required',
         ]);
 
         $user = User::findOrFail($id);
@@ -60,6 +63,11 @@ class UserController extends Controller
 
     public function destroy($id){
         $user = User::findOrFail($id);
+        if($user->id == auth()->user()->id){
+            toastr()->error('You can not delete yourself!');
+            return redirect()->route('users.index');
+        }
+
         $user->delete();
 
         toastr()->success('User deleted successfully!');
