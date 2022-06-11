@@ -84,9 +84,17 @@
                         @endcan
                         @can('manage.news.index')
                             <li class="nav-item">
-                                <a href="{{ route('manage.news.index') }}" class="nav-link @if(\Request::routeIs('manage.news.*')) active @endif">
+                                <a href="{{ route('manage.news.index') }}" class="nav-link @if(\Request::routeIs('manage.news.index')) active @endif">
                                     <i class="fas fa-magnet nav-icon"></i>
                                     <p>Manage news</p>
+                                </a>
+                            </li>
+                        @endcan
+                        @can('manage.news.highlight.article')
+                            <li class="nav-item">
+                                <a href="{{ route('manage.news.highlights') }}" class="nav-link @if(\Request::routeIs('manage.news.highlights')) active @endif">
+                                    <i class="fas fa-highlighter nav-icon"></i>
+                                    <p>Highlight news</p>
                                 </a>
                             </li>
                         @endcan

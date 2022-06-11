@@ -22,23 +22,6 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Articles</h3>
-                            <div class="card-tools">
-                                <form action="{{ route('manage.news.filter-by-writer') }}" method="post">
-                                    @csrf
-                                    <div class="input-group input-group-sm">
-                                        <select name="writer" id="writer" class="form-control">
-                                            <option value="" selected disabled>Select Writer</option>
-                                            <option value="all">All</option>
-                                            @foreach($writers as $writer)
-                                                <option value="{{ $writer->id }}" @if(Session::get('writer') == $writer->id) selected @endif>{{ $writer->name }}</option>
-                                            @endforeach
-                                        </select>
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-primary">Filter by writer</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
                         </div>
                         <div class="card-body">
                             <table id="articles_table" class="table table-bordered table-striped">
@@ -48,10 +31,9 @@
                                     <th>Title</th>
                                     <th>Author</th>
                                     <th>Category</th>
-                                    <th>Published</th>
+                                    <th>Highlight</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
-                                    <th>Action</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -70,15 +52,10 @@
                                         <td>
                                             <input data-id="{{$article->id}}" class="toggle-class" type="checkbox" data-onstyle="success"
                                                    data-offstyle="danger" data-toggle="toggle" data-on="Yes" data-off="No"
-                                                {{ $article->published ? 'checked' : '' }}>
+                                                {{ $article->is_highlighted ? 'checked' : '' }}>
                                         </td>
                                         <td data-toggle="tooltip" data-placement="top" title="{{ $article->created_at->diffForHumans() }}">{{ $article->created_at }}</td>
                                         <td data-toggle="tooltip" data-placement="top" title="{{ $article->updated_at->diffForHumans() }}">{{ $article->updated_at }}</td>
-                                        <td>
-                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-xl" data-attr="{{ $article->id }}">
-                                                Preview Article
-                                            </button>
-                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -89,21 +66,6 @@
             </div>
         </div>
     </section>
-
-    <div class="modal fade" id="modal-xl">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title"></h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body"></div>
-                <div class="modal-thumbnail"></div>
-            </div>
-        </div>
-    </div>
 @endsection
 @push('styles')
     <link rel="stylesheet" href="{{ asset('admin-lte/plugins/fontawesome-free/css/all.min.css') }}">
@@ -141,39 +103,16 @@
             $('[data-toggle="tooltip"]').tooltip()
         })
 
-
-        $('#modal-xl').on('show.bs.modal', function (event) {
-            var button = $(event.relatedTarget)
-            var id = button.data('attr')
-            $.ajax({
-                url: '{{ route('manage.news.preview.article') }}',
-                type: 'GET',
-                data: {
-                    id: id
-                },
-                success: function (data) {
-                    $('.modal-title').text(data.title)
-                    $('.modal-body').html(data.body)
-                    if(data.thumbnail){
-                        $('.modal-thumbnail').append(`<img src="{{ asset('storage/thumbnails/') }}/${data.thumbnail}" alt="${data.title}" class="img-fluid">`)
-                    }
-
-                }
-            })
-
-        })
-
         $(function(){
             $('.toggle-class').change(function(){
-                var publish = $(this).prop('checked') == true ? 1:0;
+                var is_highlighted = $(this).prop('checked') == true ? 1:0;
                 var id = $(this).data('id');
                 $.ajax({
                     type: "GET",
                     dataType: "json",
-                    url: "{{route('manage.news.publish')}}",
-                    data: { 'publish': publish, 'id': id},
+                    url: "{{route('manage.news.highlight.article')}}",
+                    data: { 'is_highlighted': is_highlighted, 'id': id},
                     success: function(data){
-
                     }
                 });
             });

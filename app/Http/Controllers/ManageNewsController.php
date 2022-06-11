@@ -11,7 +11,6 @@ class ManageNewsController extends Controller
 {
 
     public function index(){
-
         $articles = Article::orderBy('published', 'asc')->get();
         $writer = Session::get('writer');
         if($writer){
@@ -28,6 +27,11 @@ class ManageNewsController extends Controller
         $article->save();
     }
 
+    public function previewArticle(Request $request){
+        $article = Article::findOrFail($request->id);
+        return response()->json($article);
+    }
+
     public function filterByWriter(Request $request){
         if($request->writer == 'all'){
             Session::forget('writer');
@@ -40,4 +44,16 @@ class ManageNewsController extends Controller
         toastr()->success('News are now visible only for '.$writer->name);
         return redirect()->route('manage.news.index');
     }
+
+    public function highlights(){
+        $articles = Article::articlesInFrontend()->orderBy('is_highlighted', 'asc')->get();
+        return view('back-office.manage-news.highlight', compact('articles'));
+    }
+
+    public function highlightArticle(Request $request){
+        $article = Article::findOrFail($request->id);
+        $article->is_highlighted = $request->is_highlighted;
+        $article->save();
+    }
+
 }

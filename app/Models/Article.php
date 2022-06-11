@@ -17,7 +17,8 @@ class Article extends Model
         'published',
         'slug',
         'category_id',
-        'short_description'
+        'short_description',
+        'is_highlighted'
     ];
 
     public function user(){

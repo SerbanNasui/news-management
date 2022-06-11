@@ -69,6 +69,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::get('/',[ManageNewsController::class, 'index'])->name('index');
             Route::get('/publish', [ManageNewsController::class, 'publishArticle'])->name('publish');
             Route::post('/filter-by-writer', [ManageNewsController::class, 'filterByWriter'])->name('filter-by-writer');
+            Route::get('/highlights', [ManageNewsController::class, 'highlights'])->name('highlights');
+            Route::get('/highlight-article', [ManageNewsController::class, 'highlightArticle'])->name('highlight.article');
+            Route::get('/preview-article', [ManageNewsController::class, 'previewArticle'])->name('preview.article');
         });
     });
 });
