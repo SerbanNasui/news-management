@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
+use App\Services\WeatherApiService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,5 +26,10 @@ class HomeController extends Controller
     public function displayArticle($id){
         $article = Article::isPublished($id);
         return view('client.article', compact('article'));
+    }
+
+    public function displayWeather(){
+        $weather = (new WeatherApiService())->getWeather();
+        return response()->json($weather);
     }
 }

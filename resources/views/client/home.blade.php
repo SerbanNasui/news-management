@@ -1,6 +1,13 @@
 @extends('layouts.app')
 @section('content')
     <x-client.hero></x-client.hero>
+    <section id="clients" class="clients section-bg">
+        <div class="container">
+            <img src="{{ asset('images/weather-loading.gif') }}" class="ajax-loader">
+            <div class="row" id="weather">
+            </div>
+        </div>
+    </section>
     <section id="categories" class="portfolio">
         <div class="container">
 
@@ -62,41 +69,40 @@
         </div>
     </section>
 
-    <section id="contact" class="contact">
-        <div class="container">
-
-            <div class="section-title">
-                <h2>Contact</h2>
-                <p>If you have any question about our company, please contact us! We are happy to talk with you!</p>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="info-box">
-                                <i class="bx bx-map"></i>
-                                <h3>Our Address</h3>
-                                <p>Str. Ştiinţei nr. 2, Galaţi, 800210</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="info-box mt-4">
-                                <i class="bx bx-envelope"></i>
-                                <h3>Email Us</h3>
-                                <p>info@newsdirect.com<br>contact@newsdirect.com</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="info-box mt-4">
-                                <i class="bx bx-phone-call"></i>
-                                <h3>Call Us</h3>
-                                <p>+4 0755 111 222<br>+40 0723 919 111</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </section>
+    <x-client.contact></x-client.contact>
 @endsection
+@push('styles')
+    <style>
+        .ajax-loader {
+            visibility: hidden;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+        }
+    </style>
+@endpush
+@push('scripts')
+    <script src="{{ asset('jquery-3.6.0/jquery-3.6.0.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            $('.ajax-loader').css("visibility", "visible");
+            $.ajax({
+                url: '{{ route('display.weather') }}',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $.each(data, function (key, value) {
+                        $('#weather').append(`
+                            <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
+                                ${value.location.name}, ${value.current.temp_c}'&deg;C <br> ${value.current.condition.text}
+                                <img src="https:${value.current.condition.icon}" class="img-fluid" alt="">
+                            </div>
+                        `);
+                    });
+                    $('.ajax-loader').fadeOut();
+                    $('.transition').fadeIn();
+                }
+            });
+        });
+    </script>
+@endpush

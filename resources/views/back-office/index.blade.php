@@ -110,7 +110,7 @@
 @endsection
 @push('styles')
     <style>
-        .ajax-loader, .ajax-loader-tab2, .mb-ajax-loader {
+        .ajax-loader{
             visibility: hidden;
             background-color: rgba(255,255,255,0.7);
             /*position: fixed;*/
