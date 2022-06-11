@@ -23,9 +23,15 @@ class UploadImageService{
         if (!file_exists(storage_path('app/public/thumbnails'))) mkdir(storage_path('app/public/thumbnails'), 0777, true);
 
         $destinationPath = storage_path('app/public/thumbnails');
-        $imageName = $imgFile->resize(500, 500, function ($constraint) {
+        $imageName = $imgFile->resize(2560, 1440, function ($constraint) {
             $constraint->aspectRatio();
-        })->save($destinationPath . '/' . $input['thumbnail'], 100);
+        });
+        if($author == null){
+            $imageName->crop(400,400);
+        }else{
+            $imageName->crop(1920,1080);
+        }
+        $imageName->save($destinationPath . '/' . $input['thumbnail'], 100);
         $newImageName = $imageName->basename;
 
         return $newImageName;

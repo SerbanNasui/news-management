@@ -53,4 +53,9 @@ class User extends Authenticatable
         });
     }
 
+    public function scopeWritesAndPublishers($query){
+        return $query->whereHas('roles', function($q){
+            $q->where('name', 'writer')->orWhere('name', 'publisher');
+        });
+    }
 }

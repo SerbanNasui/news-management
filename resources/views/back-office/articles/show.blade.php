@@ -26,7 +26,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Title</label>
-                                    <input type="title" name="title" id="title" class="form-control" value="{{ $article->title }}">
+                                    <input type="text" name="title" id="title" class="form-control" value="{{ $article->title }}">
                                     @error('title')
                                     <span class="invalid-feedback d-block" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -61,6 +61,17 @@
                                         @enderror
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="short_description">Short Description</label>
+                                    <input type="text" name="short_description" id="short_description" class="form-control" value="{{ $article->short_description }}">
+                                    @error('short_description')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
 
                                 <div class="col-md-12 mb-2">
                                     @if($article->thumbnail)

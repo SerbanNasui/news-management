@@ -16,7 +16,8 @@ class Article extends Model
         'body',
         'published',
         'slug',
-        'category_id'
+        'category_id',
+        'short_description'
     ];
 
     public function user(){
@@ -33,5 +34,15 @@ class Article extends Model
         }else{
             return $query->where('user_id', auth()->user()->id)->orderBy('created_at', 'asc');
         }
+    }
+
+    public function scopeArticlesInFrontend($query){
+        return $query->where('published', 1);
+    }
+
+    public function isPublished($id){
+        $article = Article::find($id);
+        if($article->published == 0)abort(404);
+        return $article;
     }
 }

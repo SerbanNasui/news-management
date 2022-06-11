@@ -51,6 +51,16 @@
                                     </textarea>
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="name">Short Description</label>
+                                    <input type="text" name="short_description" id="short_description" class="form-control">
+                                    @error('short_description')
+                                        <span class="invalid-feedback d-block" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <input type="file" name="thumbnail" placeholder="Choose image" id="thumbnail">

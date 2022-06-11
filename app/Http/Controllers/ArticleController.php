@@ -27,6 +27,7 @@ class ArticleController extends Controller
             'body' => 'required|min:3',
             'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20000|dimensions:min_width=10,min_height=10',
             'category_id' => 'required|exists:categories,id',
+            'short_description' => 'max:256'
         ]);
 
         $author = auth()->user();
@@ -44,6 +45,7 @@ class ArticleController extends Controller
             'slug' => $slug,
             'thumbnail' => $imageName,
             'category_id' => $request->category_id,
+            'short_description' => $request->short_description,
         ]);
 
         toastr()->success('Article created successfully');
@@ -63,6 +65,7 @@ class ArticleController extends Controller
             'body' => 'required|min:3',
             'thumbnail' => 'image|mimes:jpeg,png,jpg,gif,svg|max:20000|dimensions:min_width=10,min_height=10',
             'category_id' => 'required|exists:categories,id',
+            'short_description' => 'max:256'
         ]);
 
         $author = auth()->user();
@@ -79,7 +82,8 @@ class ArticleController extends Controller
             'slug' => $slug,
             'thumbnail' => $imageName,
             'category_id' => $request->category_id,
-            'published' => 0
+            'published' => 0,
+            'short_description' => $request->short_description,
         ]);
 
         toastr()->success('Article updated successfully');

@@ -71,3 +71,5 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     });
 });
 
+Route::get('/news/{id}', [HomeController::class, 'showArticlesFromCategory'])->name('show.articles.from.category');
+Route::get('/article/{id}/show', [HomeController::class, 'displayArticle'])->name('display.article');
