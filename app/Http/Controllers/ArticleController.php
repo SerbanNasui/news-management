@@ -12,7 +12,7 @@ class ArticleController extends Controller
 {
 
     public function index(){
-        $articles = Article::listArticlesInBackoffice()->get();
+        $articles = Article::listArticlesInBackoffice()->with('articleViews')->get();
         return view('back-office.articles.index', compact('articles'));
     }
 

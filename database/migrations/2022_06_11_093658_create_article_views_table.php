@@ -16,8 +16,9 @@ class CreateArticleViewsTable extends Migration
         Schema::create('article_views', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('article_id');
+            $table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
             $table->tinyInteger('is_viewed')->default(1);
-            $table->string('ip')->nullable();
+            $table->longText('location')->nullable();
             $table->timestamps();
         });
     }

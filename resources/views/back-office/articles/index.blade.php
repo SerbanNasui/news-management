@@ -34,6 +34,7 @@
                                     @endcan
                                     <th>Category</th>
                                     <th>Published</th>
+                                    <th>Views</th>
                                     <th>Created at</th>
                                     <th>Updated at</th>
                                     <th>Actions</th>
@@ -61,6 +62,7 @@
                                                     <span class="badge badge-danger">Unpublished</span>
                                                 @endif
                                             </td>
+                                            <td><i class="fa fa-eye"></i> {{ $article->articleViews->count() }}</td>
                                             <td data-toggle="tooltip" data-placement="top" title="{{ $article->created_at->diffForHumans() }}">{{ $article->created_at }}</td>
                                             <td data-toggle="tooltip" data-placement="top" title="{{ $article->updated_at->diffForHumans() }}">{{ $article->updated_at }}</td>
                                             <td>

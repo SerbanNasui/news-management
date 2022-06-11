@@ -28,8 +28,8 @@ class Article extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function articleView(){
-        return $this->belongs(ArticleView::class);
+    public function articleViews(){
+        return $this->hasMany(ArticleView::class);
     }
 
     public function scopeListArticlesInBackoffice($query){

@@ -18,7 +18,7 @@ class HomeController extends Controller
 
     public function showArticlesFromCategory($id){
         $category = Category::find($id);
-        $articles = Article::articlesInFrontend()->where('category_id', $id)->get();
+        $articles = Article::articlesInFrontend()->with('articleViews')->where('category_id', $id)->get();
         return view('client.articles', compact('articles', 'category'));
     }
 

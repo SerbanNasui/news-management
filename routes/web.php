@@ -26,6 +26,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('backoffice.index');
+    Route::get('/ajax-data-loader', [DashboardController::class, 'ajaxDashboardLoader'])->name('backoffice.ajaxDashboardLoader');
 
     Route::middleware('checkPermissions')->group(function(){
         Route::group(['prefix' => 'users', 'as'=>'users.'], function () {

@@ -47,10 +47,21 @@ class User extends Authenticatable
         return $this->hasMany(Article::class);
     }
 
+    public function isAdmin(){
+        return $this->hasRole('admin');
+    }
+
     public function scopeWriters($query){
         return $query->whereHas('roles', function($q){
             $q->where('name', 'writer')->orWhere('name', 'admin');
         });
+    }
+
+    public function isAdminAndPublisher(){
+        if($this->hasRole('admin') || $this->hasRole('publisher')){
+            return true;
+        }
+        return false;
     }
 
     public function scopeWritesAndPublishers($query){

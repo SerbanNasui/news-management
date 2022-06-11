@@ -12,11 +12,12 @@ class ArticleView extends Model
     protected $fillable = [
         'article_id',
         'is_viewed',
-        'ip',
+        'location',
     ];
 
-    public function article()
-    {
+    protected $table = 'article_views';
+
+    public function article(){
         return $this->belongsTo(Article::class);
     }
 }

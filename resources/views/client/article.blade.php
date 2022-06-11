@@ -45,6 +45,7 @@
                             <li><strong>Author contact</strong>: {{ $article->user->email }}</li>
                             <li><strong>Article date</strong>: {{ $article->created_at->format('d-M-Y') }}</li>
                             <li><strong>Article time</strong>: {{ $article->created_at->format('H:i:s') }}</li>
+                            <li><strong>Article views</strong>: {{ $article->articleViews->count() }} <i class="fa fa-eye" style="font-size: 14px"></i></li>
                         </ul>
                     </div>
                 </div>
