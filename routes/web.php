@@ -47,15 +47,6 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::delete('delete/{id}', [RoleController::class, 'destroy'])->name('destroy');
         });
 
-        Route::group(['prefix' => 'news', 'as' => 'news.'], function(){
-            Route::get('/',[ArticleController::class, 'index'])->name('index');
-            Route::get('/create', [ArticleController::class, 'create'])->name('create');
-            Route::post('/store', [ArticleController::class, 'store'])->name('store');
-            Route::get('/{id}', [ArticleController::class, 'show'])->name('show');
-            Route::post('update/{id}', [ArticleController::class, 'update'])->name('update');
-            Route::delete('delete/{id}', [ArticleController::class, 'destroy'])->name('destroy');
-        });
-
         Route::group(['prefix' => 'categories', 'as' => 'categories.'], function(){
             Route::get('/',[CategoryController::class, 'index'])->name('index');
             Route::get('/create', [CategoryController::class, 'create'])->name('create');
@@ -63,6 +54,15 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::get('/{id}', [CategoryController::class, 'show'])->name('show');
             Route::post('update/{id}', [CategoryController::class, 'update'])->name('update');
             Route::delete('delete/{id}', [CategoryController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::group(['prefix' => 'news', 'as' => 'news.'], function(){
+            Route::get('/',[ArticleController::class, 'index'])->name('index');
+            Route::get('/create', [ArticleController::class, 'create'])->name('create');
+            Route::post('/store', [ArticleController::class, 'store'])->name('store');
+            Route::get('/{id}', [ArticleController::class, 'show'])->name('show');
+            Route::post('update/{id}', [ArticleController::class, 'update'])->name('update');
+            Route::delete('delete/{id}', [ArticleController::class, 'destroy'])->name('destroy');
         });
 
         Route::group(['prefix' => 'manage-news', 'as' => 'manage.news.'], function(){

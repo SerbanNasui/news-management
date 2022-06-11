@@ -32,6 +32,11 @@ class PermissionsTableSeeder extends Seeder
             'password.confirm',
             'home',
             'backoffice.index',
+            'show.articles.from.category',
+            'display.article',
+            'display.weather',
+            'increment.views',
+            'backoffice.ajaxDashboardLoader'
         ];
 
         $exceptions = collect($exceptions);
@@ -43,7 +48,6 @@ class PermissionsTableSeeder extends Seeder
                     Permission::firstOrCreate(['name' => $route->getName()],['name' => $route->getName()]);
                 }
             }
-
         }
     }
 }

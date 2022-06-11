@@ -29,7 +29,7 @@ class RoleTableSeeder extends Seeder
         ]);
 
         $writer->givePermissionTo(['news.index', 'news.create', 'news.store', 'news.show', 'news.update', 'news.destroy']);
-        $publisher->givePermissionTo(['manage.news.index', 'manage.news.publish', 'manage.news.filter-by-writer']);
+        $publisher->givePermissionTo(['manage.news.index', 'manage.news.publish', 'manage.news.filter-by-writer', 'manage.news.highlights', 'manage.news.highlight.article', 'manage.news.preview.article']);
 
     }
 }
