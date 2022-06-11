@@ -28,6 +28,10 @@ class Article extends Model
         return $this->belongsTo(Category::class);
     }
 
+    public function articleView(){
+        return $this->belongs(ArticleView::class);
+    }
+
     public function scopeListArticlesInBackoffice($query){
         if(auth()->user()->hasRole('admin')){
             return $query->orderBy('created_at', 'asc');

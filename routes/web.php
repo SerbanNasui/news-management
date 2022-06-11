@@ -8,6 +8,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ManageNewsController;
+use App\Http\Controllers\ViewsController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -73,3 +74,4 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
 
 Route::get('/news/{id}', [HomeController::class, 'showArticlesFromCategory'])->name('show.articles.from.category');
 Route::get('/article/{id}/show', [HomeController::class, 'displayArticle'])->name('display.article');
+Route::get('/views/{id}', [ViewsController::class, 'incrementViews'])->name('increment.views');

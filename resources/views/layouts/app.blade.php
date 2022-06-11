@@ -10,7 +10,6 @@
 
     <title>{{ config('app.name', 'NewsDirect') }}</title>
 
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link href="{{ asset('client/assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -19,8 +18,7 @@
     <link href="{{ asset('client/assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('client/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <link href="{{ asset('client/assets/css/style.css') }}" rel="stylesheet">
-
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    @stack('styles')
 
 </head>
 <body>
@@ -39,5 +37,6 @@
     <script src="{{ asset('client/assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('client/assets/vendor/php-email-form/validate.js') }}"></script>
     <script src="{{ asset('client/assets/js/main.js') }}"></script>
+    @stack('scripts')
 </body>
 </html>

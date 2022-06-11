@@ -64,3 +64,22 @@
         </div>
     </section>
 @endsection
+@push('styles')
+@endpush
+@push('scripts')
+    <script src="{{ asset('jquery-3.6.0/jquery-3.6.0.min.js') }}"></script>
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $.ajax({
+                    url: '{{ route('increment.views', $article->id) }}',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        console.log(data);
+                    },
+                });
+            }, 5000);
+        });
+    </script>
+@endpush
