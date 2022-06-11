@@ -46,14 +46,16 @@ class ManageNewsController extends Controller
     }
 
     public function highlights(){
-        $articles = Article::articlesInFrontend()->orderBy('is_highlighted', 'asc')->get();
+        $articles = Article::articlesInFrontend()->where('thumbnail','!=',null)->orderBy('is_highlighted', 'asc')->get();
         return view('back-office.manage-news.highlight', compact('articles'));
     }
 
     public function highlightArticle(Request $request){
         $article = Article::findOrFail($request->id);
-        $article->is_highlighted = $request->is_highlighted;
-        $article->save();
+        if($article->thumbnail) {
+            $article->is_highlighted = $request->is_highlighted;
+            $article->save();
+        }
     }
 
 }

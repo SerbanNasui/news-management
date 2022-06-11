@@ -50,4 +50,8 @@ class Article extends Model
         if($article->published == 0)abort(404);
         return $article;
     }
+
+    public function scopeHighlighted($query){
+        return $query->where('is_highlighted', 1);
+    }
 }

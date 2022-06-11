@@ -83,6 +83,7 @@ class ArticleController extends Controller
             'thumbnail' => $imageName,
             'category_id' => $request->category_id,
             'published' => 0,
+            'is_highlighted' => 0,
             'short_description' => $request->short_description,
         ]);
 

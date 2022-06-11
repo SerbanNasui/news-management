@@ -14,7 +14,8 @@ class HomeController extends Controller
     public function index(){
         $categories = Category::all();
         $users = User::writesAndPublishers()->get();
-        return view('client.home', compact('categories', 'users'));
+        $articles = Article::articlesInFrontend()->highlighted()->get();
+        return view('client.home', compact('categories', 'users', 'articles'));
     }
 
     public function showArticlesFromCategory($id){
