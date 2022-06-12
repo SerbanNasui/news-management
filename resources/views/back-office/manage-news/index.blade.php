@@ -143,6 +143,9 @@
 
 
         $('#modal-xl').on('show.bs.modal', function (event) {
+            $('.modal-title').html('');
+            $('.modal-body').html('');
+            $('.modal-thumbnail').html('');
             var button = $(event.relatedTarget)
             var id = button.data('attr')
             $.ajax({
