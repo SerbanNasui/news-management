@@ -104,6 +104,7 @@
                         @endcan
                     </ul>
                 </li>
+                @can('weather.index')
                 <li class="nav-item @if(\Request::routeIs('weather.*')) menu-open @endif">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-thermometer-empty"></i>
@@ -121,6 +122,7 @@
                         </li>
                     </ul>
                 </li>
+                @endcan
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="nav-link">
                         <i class="nav-icon fas fa-power-off text-red"></i>
