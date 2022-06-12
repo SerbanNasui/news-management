@@ -47,6 +47,10 @@ class User extends Authenticatable
         return $this->hasMany(Article::class);
     }
 
+    public function profile(){
+        return $this->hasOne(UserProfile::class);
+    }
+
     public function isAdmin(){
         return $this->hasRole('admin');
     }

@@ -53,15 +53,6 @@
                                     </textarea>
                                 </div>
 
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <input type="file" name="thumbnail" placeholder="Choose image" id="thumbnail">
-                                        @error('thumbnail')
-                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                </div>
-
                                 <div class="form-group">
                                     <label for="short_description">Short Description</label>
                                     <input type="text" name="short_description" id="short_description" class="form-control" value="{{ $article->short_description }}">
@@ -72,10 +63,19 @@
                                     @enderror
                                 </div>
 
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <input type="file" name="thumbnail" placeholder="Choose image" id="thumbnail">
+                                        @error('thumbnail')
+                                        <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                </div>
+
 
                                 <div class="col-md-12 mb-2">
                                     @if($article->thumbnail)
-                                        <img src="{{ asset('storage/thumbnails/'.$article->thumbnail) }}" alt="{{ $article->title }}" class="img-fluid">
+                                        <img src="{{ asset('storage/thumbnails/'.$article->thumbnail) }}" alt="{{ $article->title }}" class="img-fluid" id="preview-image-before-upload">
                                     @else
                                         <img id="preview-image-before-upload" src="" alt="" style="max-height: 250px;">
                                     @endif

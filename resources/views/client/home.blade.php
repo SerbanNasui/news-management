@@ -78,12 +78,16 @@
                     <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
                         <div class="member">
                             <div class="member-img">
-                                <img src="{{ asset('client/assets/img/team/team-1.jpg') }}" class="img-fluid" alt="">
+                                @if($user->profile)
+                                    <img src="{{ asset('storage/avatars/'.$user->profile->avatar) }}" class="img-fluid" alt="">
+                                @else
+                                    <img src="{{ asset('client/assets/img/team/team-1.jpg') }}" class="img-fluid" alt="">
+                                @endif
                                 <div class="social">
-                                    <a href=""><i class="bi bi-twitter"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
+                                    <a href="{{ $user->profile->twitter??'#' }}" target="_blank"><i class="bi bi-twitter"></i></a>
+                                    <a href="{{ $user->profile->facebook??'#' }}" target="_blank"><i class="bi bi-facebook"></i></a>
+                                    <a href="{{ $user->profile->instagram??'#' }}" target="_blank"><i class="bi bi-instagram"></i></a>
+                                    <a href="{{ $user->profile->linkedin??'#' }}" target="_blank"><i class="bi bi-linkedin"></i></a>
                                 </div>
                             </div>
                             <div class="member-info">

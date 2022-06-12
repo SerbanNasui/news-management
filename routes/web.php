@@ -9,6 +9,7 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ManageNewsController;
 use App\Http\Controllers\ViewsController;
+use App\Http\Controllers\UserProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -36,6 +37,13 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::get('/{id}', [UserController::class, 'show'])->name('show');
             Route::post('update/{id}', [UserController::class, 'update'])->name('update');
             Route::delete('delete/{id}', [UserController::class, 'destroy'])->name('destroy');
+        });
+
+        Route::group(['prefix' => 'profile', 'as'=>'profile.'], function () {
+            Route::get('/{id}', [UserProfileController::class, 'index'])->name('index');
+            Route::post('/create/{id}', [UserProfileController::class, 'create'])->name('create');
+            Route::post('/update/{id}', [UserProfileController::class, 'update'])->name('update');
+            Route::post('/change-password{id}', [UserProfileController::class, 'changePassword'])->name('change.password');
         });
 
         Route::group(['prefix' => 'roles', 'as'=>'roles.'], function () {
