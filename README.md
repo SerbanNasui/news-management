@@ -4,7 +4,7 @@
 
 Create an account on https://www.weatherapi.com/ to get weather API key.
 
-###Next steps:
+##Next steps:
 - **setup .env file**
 - **composer install**
 - **php artisan key:generate**
