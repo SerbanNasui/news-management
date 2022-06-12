@@ -22,7 +22,8 @@ class ArticleTableSeeder extends Seeder
             'user_id' => 2,
             'category_id' => 1,
             'published' => 0,
-            'slug' => strtolower(str_replace(' ', '-', 'Article 1')).'-2-'.Carbon::now()->timestamp
+            'slug' => strtolower(str_replace(' ', '-', 'Article 1')).'-2-'.Carbon::now()->timestamp,
+            'short_description' => "Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of ",
         ]);
 
         Article::firstOrCreate(['title'=>'Article 2'],[
@@ -31,7 +32,8 @@ class ArticleTableSeeder extends Seeder
             'user_id' => 2,
             'category_id' => 3,
             'published' => 1,
-            'slug' => strtolower(str_replace(' ', '-', 'Article 2')).'-2-'.Carbon::now()->timestamp
+            'slug' => strtolower(str_replace(' ', '-', 'Article 2')).'-2-'.Carbon::now()->timestamp,
+            'short_description' => "Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of ",
         ]);
 
         Article::firstOrCreate(['title'=>'Article 3'],[
@@ -40,7 +42,8 @@ class ArticleTableSeeder extends Seeder
             'user_id' => 3,
             'category_id' => 3,
             'published' => 0,
-            'slug' => strtolower(str_replace(' ', '-', 'Article 3')).'-3-'.Carbon::now()->timestamp
+            'slug' => strtolower(str_replace(' ', '-', 'Article 3')).'-3-'.Carbon::now()->timestamp,
+            'short_description' => "Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of ",
         ]);
 
         Article::firstOrCreate(['title'=>'Article 4'],[
@@ -49,7 +52,8 @@ class ArticleTableSeeder extends Seeder
             'user_id' => 3,
             'category_id' => 3,
             'published' => 1,
-            'slug' => strtolower(str_replace(' ', '-', 'Article 4')).'-3-'.Carbon::now()->timestamp
+            'slug' => strtolower(str_replace(' ', '-', 'Article 4')).'-3-'.Carbon::now()->timestamp,
+            'short_description' => "Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of ",
         ]);
 
         Article::firstOrCreate(['title'=>'Article 5'],[
@@ -58,7 +62,8 @@ class ArticleTableSeeder extends Seeder
             'user_id' => 3,
             'category_id' => 5,
             'published' => 1,
-            'slug' => strtolower(str_replace(' ', '-', 'Article 5')).'-3-'.Carbon::now()->timestamp
+            'slug' => strtolower(str_replace(' ', '-', 'Article 5')).'-3-'.Carbon::now()->timestamp,
+            'short_description' => "Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of ",
         ]);
     }
 }
