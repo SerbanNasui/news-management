@@ -47,6 +47,12 @@
                             <li><strong>Article time</strong>: {{ $article->created_at->format('H:i:s') }}</li>
                             <li><strong>Article views</strong>: {{ $article->articleViews->count() }} <i class="fa fa-eye" style="font-size: 14px"></i></li>
                         </ul>
+                        <div class="social">
+                            <a href="{{ $article->user->profile->twitter??'#' }}" target="_blank"><i class="bi bi-twitter"></i></a>
+                            <a href="{{ $article->user->profile->facebook??'#' }}" target="_blank"><i class="bi bi-facebook"></i></a>
+                            <a href="{{ $article->user->profile->instagram??'#' }}" target="_blank"><i class="bi bi-instagram"></i></a>
+                            <a href="{{ $article->user->profile->linkedin??'#' }}" target="_blank"><i class="bi bi-linkedin"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
