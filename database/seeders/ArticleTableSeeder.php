@@ -52,7 +52,7 @@ class ArticleTableSeeder extends Seeder
 
         $locations = [$location1, $location2, $location3, $location4];
 
-        for($i = 1; $i <= 40; $i++){
+        for($i = 1; $i <= 30; $i++){
             $articleTitle = 'Article ' . $i;
             $users = [2,3,4];
             $categories = [1,2,3,4,5,6,7,8,9];
@@ -73,11 +73,14 @@ class ArticleTableSeeder extends Seeder
                 'thumbnail' => (new UploadImageService())->uploadThumbnail($array[array_rand($array)], strtolower(str_replace(' ', '-', $articleTitle)).'-'.$user.'-'.Carbon::now()->timestamp, User::find($user))
             ]);
 
+            $views = rand(1, 15);
             if($isPublished == 1){
-                ArticleView::create([
-                    'article_id' => $i,
-                    'location' => $locations[array_rand($locations)]
-                ]);
+                for($j = 0; $j < $views; $j++){
+                    ArticleView::create([
+                        'article_id' => $i,
+                        'location' => $locations[array_rand($locations)]
+                    ]);
+                }
             }
         }
     }

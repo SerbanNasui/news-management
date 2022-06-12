@@ -36,10 +36,10 @@ class UploadImageService{
 
     public function uploadAvatar(Request $request,$author){
 
-        $image = $request->file('avatar');
-        $input['avatar'] = 'avatar-'. $author->id.'-'. $this->createFileName() . '.' . $image->getClientOriginalExtension();
+        $image = $request->avatar->getRealPath();
+        $input['avatar'] = 'avatar-'. $author->id.'-'. $this->createFileName() . '.' . $request->avatar->extension()??'jpg';
 
-        $imgFile = Image::make($image->getRealPath());
+        $imgFile = Image::make($image);
 
         if (!file_exists(storage_path('app/public/avatars'))) mkdir(storage_path('app/public/avatars'), 0777, true);
 
