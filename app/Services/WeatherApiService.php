@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class WeatherApiService{
 
@@ -20,6 +21,7 @@ class WeatherApiService{
         $apiKey = env('WEATHER_API_KEY');
         $apiUrl = 'http://api.weatherapi.com/v1/current.json?key='.$apiKey.'&q='.$city.'&aqi='.$aqi;
         $response = Http::get($apiUrl);
+        Log::notice($response);
         return json_decode($response->body());
     }
 }

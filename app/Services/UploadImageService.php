@@ -10,15 +10,14 @@ class UploadImageService{
     public function uploadThumbnail(Request $request, $slug,$author=null){
 
         if($author != null){
-            $image = $request->file('thumbnail');
-            $input['thumbnail'] = 'thumbnail-'. $slug.'-'.$author->id.'-'. $this->createFileName() . '.' . $image->getClientOriginalExtension();
+            $image = $request->thumbnail->getRealPath();
+            $input['thumbnail'] = 'thumbnail-'. $slug.'-'.$author->id.'-'. $this->createFileName() . '.' . $request->thumbnail->extension()??'jpg';
         }else{
-            $image = $request->file('image');
-            $input['thumbnail'] = 'thumbnail-'. $slug.'-'. $this->createFileName() . '.' . $image->getClientOriginalExtension();
+            $image = $request->image->getRealPath();
+            $input['thumbnail'] = 'thumbnail-'. $slug.'-'. $this->createFileName() . '.' . $request->image->extension()??'jpg';
         }
 
-
-        $imgFile = Image::make($image->getRealPath());
+        $imgFile = Image::make($image);
 
         if (!file_exists(storage_path('app/public/thumbnails'))) mkdir(storage_path('app/public/thumbnails'), 0777, true);
 
