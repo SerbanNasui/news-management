@@ -10,6 +10,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ManageNewsController;
 use App\Http\Controllers\ViewsController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\WeatherController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -81,10 +82,17 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::get('/highlight-article', [ManageNewsController::class, 'highlightArticle'])->name('highlight.article');
             Route::get('/preview-article', [ManageNewsController::class, 'previewArticle'])->name('preview.article');
         });
+
+        Route::group(['prefix' => 'weather', 'as' => 'weather.'], function(){
+            Route::get('/',[WeatherController::class, 'index'])->name('index');
+            Route::post('/store', [WeatherController::class, 'store'])->name('store');
+            Route::delete('delete/{id}', [WeatherController::class, 'delete'])->name('delete');
+            Route::put('restore/{id}', [WeatherController::class, 'restore'])->name('restore');
+            Route::delete('destroy/{id}', [WeatherController::class, 'destroy'])->name('destroy');
+        });
     });
 });
 
 Route::get('/news/{id}', [HomeController::class, 'showArticlesFromCategory'])->name('show.articles.from.category');
 Route::get('/article/{id}/show', [HomeController::class, 'displayArticle'])->name('display.article');
-Route::get('/weather', [HomeController::class, 'displayWeather'])->name('display.weather');
 Route::get('/views/{id}', [ViewsController::class, 'incrementViews'])->name('increment.views');

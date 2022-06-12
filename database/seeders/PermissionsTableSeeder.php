@@ -34,7 +34,6 @@ class PermissionsTableSeeder extends Seeder
             'backoffice.index',
             'show.articles.from.category',
             'display.article',
-            'display.weather',
             'increment.views',
             'backoffice.ajaxDashboardLoader'
         ];

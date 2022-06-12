@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Weather;
 use App\Services\WeatherApiService;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,8 @@ class HomeController extends Controller
         $categories = Category::all();
         $users = User::writesAndPublishers()->get();
         $articles = Article::articlesInFrontend()->highlighted()->get();
-        return view('client.home', compact('categories', 'users', 'articles'));
+        $weather = Weather::inRandomOrder()->get();
+        return view('client.home', compact('categories', 'users', 'articles', 'weather'));
     }
 
     public function showArticlesFromCategory($id){

@@ -7,35 +7,11 @@ use Illuminate\Http\Request;
 
 class WeatherApiService{
 
-    public function getWeather(){
-        $cities = [
-            [
-                'name' => 'Bucharest',
-                'aqi' => 'no',
-            ],
-            [
-                'name' => 'Brasov',
-                'aqi' => 'no',
-            ],
-            [
-                'name' => 'Cluj-Napoca',
-                'aqi' => 'no',
-            ],
-            [
-                'name' => 'Constanta',
-                'aqi' => 'no',
-            ],
-            [
-                'name' => 'Galati',
-                'aqi' => 'no',
-            ],
-            [
-                'name' => 'Iasi',
-                'aqi' => 'no',
-            ],
-        ];
-        foreach ($cities as $city) {
-            $response[] = $this->getWeatherApi($city['name'], $city['aqi']);
+    public function getWeather($city, $aqi){
+
+        $response = $this->getWeatherApi($city, $aqi);
+        if(isset($response->error)){
+            return 'error';
         }
         return $response;
     }

@@ -104,6 +104,23 @@
                         @endcan
                     </ul>
                 </li>
+                <li class="nav-item @if(\Request::routeIs('weather.*')) menu-open @endif">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-thermometer-empty"></i>
+                        <p>
+                            Weather in City
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('weather.index') }}" class="nav-link @if(\Request::routeIs('weather.*')) active @endif">
+                                <i class="fas fa-city nav-icon"></i>
+                                <p>Cities</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="nav-link">
                         <i class="nav-icon fas fa-power-off text-red"></i>
