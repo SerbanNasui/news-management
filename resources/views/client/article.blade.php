@@ -136,7 +136,7 @@
             <div class="section-title">
                 <h2>Comments</h2>
                 @if($comments->total() > 0)
-                    <p>Rating: {{ $comments->sum('stars')/$comments->count() }}<i class="fa fa-star"></i>/5. Total comments: {{ $comments->count() }}</p>
+                    <p>Rating: {{ number_format($comments->sum('stars')/$comments->count(),2) }}<i class="fa fa-star"></i>/5 <br>Total comments: {{ $comments->count() }}</p>
                 @endif
             </div>
             <div class="row">
@@ -180,6 +180,9 @@
         }
         .page-item .page-link {
             color: #ffc107 !important;
+        }
+        .fa-star{
+            color: #ffc107;
         }
     </style>
 @endpush
