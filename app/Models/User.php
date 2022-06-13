@@ -55,7 +55,7 @@ class User extends Authenticatable
         return $this->hasRole('admin');
     }
 
-    public function scopeWriter(){
+    public function scopeWriter($query){
         return $query->whereHas('roles', function($q){
             $q->where('name', 'writer');
         });
