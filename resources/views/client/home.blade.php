@@ -90,6 +90,12 @@
             margin-top: -60px;
             margin-bottom: -85px;
         }
+
+        .highlighted-articles-link{
+            text-decoration: none;
+            cursor: pointer;
+            color: #0a0e14;
+        }
     </style>
 @endpush
 @push('scripts')

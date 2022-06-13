@@ -19,6 +19,7 @@
     <link href="{{ asset('client/assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('client/assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
     <link href="{{ asset('client/assets/css/style.css') }}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
     @stack('styles')
 
 </head>
