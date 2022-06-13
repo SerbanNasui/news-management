@@ -25,7 +25,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Title</label>
-                                    <input type="title" name="title" id="title" class="form-control" value="{{ old('title') }}">
+                                    <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}">
                                     @error('title')
                                         <span class="invalid-feedback d-block" role="alert">
                                             <strong>{{ $message }}</strong>
