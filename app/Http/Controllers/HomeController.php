@@ -22,13 +22,14 @@ class HomeController extends Controller
 
     public function showArticlesFromCategory($id){
         $category = Category::find($id);
-        $articles = Article::articlesInFrontend()->with('articleViews')->where('category_id', $id)->get();
+        $articles = Article::articlesInFrontend()->with('articleViews')->where('category_id', $id)->paginate(6);
         return view('client.articles', compact('articles', 'category'));
     }
 
     public function displayArticle($id){
         $article = Article::isPublished($id);
-        return view('client.article', compact('article'));
+        $comments = $article->comments()->approved()->paginate(10);
+        return view('client.article', compact('article', 'comments'));
     }
 
     public function displayWeather(){

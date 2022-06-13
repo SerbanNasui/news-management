@@ -11,6 +11,7 @@ use App\Http\Controllers\ManageNewsController;
 use App\Http\Controllers\ViewsController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\WeatherController;
+use App\Http\Controllers\CommentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -81,6 +82,9 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::get('/highlights', [ManageNewsController::class, 'highlights'])->name('highlights');
             Route::get('/highlight-article', [ManageNewsController::class, 'highlightArticle'])->name('highlight.article');
             Route::get('/preview-article', [ManageNewsController::class, 'previewArticle'])->name('preview.article');
+
+            Route::get('/comments', [ManageNewsController::class, 'commentsIndex'])->name('comments.index');
+            Route::get('/comments-approve', [ManageNewsController::class, 'commentApprove'])->name('comments.approve');
         });
 
         Route::group(['prefix' => 'weather', 'as' => 'weather.'], function(){
@@ -96,3 +100,4 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
 Route::get('/news/{id}', [HomeController::class, 'showArticlesFromCategory'])->name('show.articles.from.category');
 Route::get('/article/{id}/show', [HomeController::class, 'displayArticle'])->name('display.article');
 Route::get('/views/{id}', [ViewsController::class, 'incrementViews'])->name('increment.views');
+Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');

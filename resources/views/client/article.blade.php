@@ -70,8 +70,115 @@
             </section>
         </div>
     </section>
+    <section class="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Leave us a review</h2>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <form action="{{ route('comment.store') }}" method="post" role="form" class="form-group">
+                        @csrf
+                        @method('POST')
+                        <input type="hidden" name="article_id" value="{{ $article->id }}">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" @error('name') autofocus @enderror>
+                                @error('name')
+                                    <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" @error('email') autofocus @enderror>
+                                @error('email')
+                                <span class="invalid-feedback d-block" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <select name="stars" id="stars" class="form-control" @error('stars') autofocus @enderror>
+                                <option selected disabled>Stars</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                            @error('stars')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="form-group mt-3">
+                            <textarea class="form-control" name="body" rows="5" placeholder="Message" @error('body') autofocus @enderror></textarea>
+                            @error('body')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="my-3"></div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-warning rounded-3">Send</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="comments" class="comments">
+        <div class="container">
+            <div class="section-title">
+                <h2>Comments</h2>
+            </div>
+            <div class="row">
+                <div class="col-4"></div>
+                <div class="col-6">
+                    <div class="comments-list">
+                        @foreach($comments as $comment)
+                            <div class="comment-item">
+                                <div class="comment-item-header">
+                                    <div class="comment-item-avatar">
+                                        <img src="{{ asset('images/avatar.png') }}" alt="">
+                                    </div>
+                                    <div class="comment-item-name">
+                                        <h5>{{ $comment->name }}</h5>
+                                        <span>{{ $comment->created_at->format('d-M-Y') }}</span>
+                                    </div>
+                                    <div class="comment-item-stars">
+                                        @for($i = 0; $i < $comment->stars; $i++)
+                                            <i class="fa fa-star"></i>
+                                        @endfor
+                                    </div>
+                                </div>
+                                <div class="comment-item-body">
+                                    <p>{{ $comment->body }}</p>
+                                </div>
+                            </div>
+                        @endforeach
+                        {{ $comments->links() }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
 @push('styles')
+    <style>
+        .page-item.active .page-link {
+            background-color: #ffc107 !important;
+            border-color: #ffc107 !important;
+            color: black !important;
+        }
+        .page-item .page-link {
+            color: #ffc107 !important;
+        }
+    </style>
 @endpush
 @push('scripts')
     <script src="{{ asset('jquery-3.6.0/jquery-3.6.0.min.js') }}"></script>

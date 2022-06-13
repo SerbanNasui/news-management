@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -56,6 +57,17 @@ class ManageNewsController extends Controller
             $article->is_highlighted = $request->is_highlighted;
             $article->save();
         }
+    }
+
+    public function commentsIndex(){
+        $comments = Comment::orderBy('approved', 'asc')->get();
+        return view('back-office.manage-news.comments', compact('comments'));
+    }
+
+    public function commentApprove(Request $request){
+        $comment = Comment::findOrFail($request->id);
+        $comment->approved = $request->approved;
+        $comment->save();
     }
 
 }

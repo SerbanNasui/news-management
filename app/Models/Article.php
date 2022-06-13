@@ -33,6 +33,10 @@ class Article extends Model
         return $this->hasMany(ArticleView::class);
     }
 
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
     public function scopeListArticlesInBackoffice($query){
         if(auth()->user()->hasRole('admin')){
             return $query->orderBy('created_at', 'asc');

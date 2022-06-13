@@ -35,7 +35,8 @@ class PermissionsTableSeeder extends Seeder
             'show.articles.from.category',
             'display.article',
             'increment.views',
-            'backoffice.ajaxDashboardLoader'
+            'backoffice.ajaxDashboardLoader',
+            'comment.store',
         ];
 
         $exceptions = collect($exceptions);

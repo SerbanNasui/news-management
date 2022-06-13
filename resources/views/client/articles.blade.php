@@ -36,6 +36,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {{ $articles->links() }}
                         @empty
                             <h2>We are sorry. :( </h2>
                             <h4>At the moment we don't have any news for {{ ucwords($category->name) }} category. Come back later.</h4>
@@ -47,3 +48,15 @@
         </div>
     </section>
 @endsection
+@push('styles')
+    <style>
+        .page-item.active .page-link {
+            background-color: #ffc107 !important;
+            border-color: #ffc107 !important;
+            color: black !important;
+        }
+        .page-item .page-link {
+            color: #ffc107 !important;
+        }
+    </style>
+@endpush

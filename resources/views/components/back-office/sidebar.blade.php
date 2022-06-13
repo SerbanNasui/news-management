@@ -102,6 +102,14 @@
                                 </a>
                             </li>
                         @endcan
+                            @can('manage.news.comments.index')
+                                <li class="nav-item">
+                                    <a href="{{ route('manage.news.comments.index') }}" class="nav-link @if(\Request::routeIs('manage.news.comments.index')) active @endif">
+                                        <i class="fas fa-text-height nav-icon"></i>
+                                        <p>Comments</p>
+                                    </a>
+                                </li>
+                            @endcan
                     </ul>
                 </li>
                 @can('weather.index')
