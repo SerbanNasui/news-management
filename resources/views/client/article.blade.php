@@ -135,6 +135,9 @@
         <div class="container">
             <div class="section-title">
                 <h2>Comments</h2>
+                @if($comments->total() > 0)
+                    <p>Rating: {{ $comments->sum('stars')/$comments->count() }}<i class="fa fa-star"></i>/5. Total comments: {{ $comments->count() }}</p>
+                @endif
             </div>
             <div class="row">
                 <div class="col-4"></div>

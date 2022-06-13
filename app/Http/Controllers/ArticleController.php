@@ -97,4 +97,10 @@ class ArticleController extends Controller
         toastr()->success('Article deleted successfully');
         return redirect()->route('news.index');
     }
+
+    public function view($id){
+        $article = Article::findOrFail($id);
+        $comments = $article->comments()->approved()->paginate(15);
+        return view('back-office.articles.view', compact('article', 'comments'));
+    }
 }

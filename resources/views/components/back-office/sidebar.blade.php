@@ -80,7 +80,7 @@
                         @endcan
                         @can('news.index')
                             <li class="nav-item">
-                                <a href="{{ route('news.index') }}" class="nav-link @if(\Request::routeIs('news.index') || \Request::routeIs('news.show')) active @endif">
+                                <a href="{{ route('news.index') }}" class="nav-link @if(\Request::routeIs('news.index') || \Request::routeIs('news.show') || \Request::routeIs('news.view')) active @endif">
                                     <i class="fas fa-clipboard nav-icon"></i>
                                     <p>News list</p>
                                 </a>

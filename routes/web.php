@@ -73,6 +73,8 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
             Route::get('/{id}', [ArticleController::class, 'show'])->name('show');
             Route::post('update/{id}', [ArticleController::class, 'update'])->name('update');
             Route::delete('delete/{id}', [ArticleController::class, 'destroy'])->name('destroy');
+
+            Route::get('view/{id}', [ArticleController::class, 'view'])->name('view');
         });
 
         Route::group(['prefix' => 'manage-news', 'as' => 'manage.news.'], function(){

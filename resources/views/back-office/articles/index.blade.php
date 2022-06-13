@@ -66,7 +66,10 @@
                                             <td data-toggle="tooltip" data-placement="top" title="{{ $article->created_at->diffForHumans() }}">{{ $article->created_at }}</td>
                                             <td data-toggle="tooltip" data-placement="top" title="{{ $article->updated_at->diffForHumans() }}">{{ $article->updated_at }}</td>
                                             <td>
-                                                <a href="{{ route('news.show', $article->id) }}" class="btn btn-primary btn-sm">
+                                                <a href="{{ route('news.view', $article->id) }}" class="btn btn-primary btn-sm">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a href="{{ route('news.show', $article->id) }}" class="btn btn-warning btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <form action="{{ route('news.destroy', $article->id) }}" method="post" class="d-inline">
