@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class ManageNewsController extends Controller
@@ -68,6 +69,9 @@ class ManageNewsController extends Controller
         $comment = Comment::findOrFail($request->id);
         $comment->approved = $request->approved;
         $comment->save();
+        if($comment->approved == 1) {
+            $resp = Mail::to($comment->email)->send(new \App\Mail\CommentNotification($comment));
+        }
     }
 
 }
