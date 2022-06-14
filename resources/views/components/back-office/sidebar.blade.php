@@ -131,6 +131,14 @@
                     </ul>
                 </li>
                 @endcan
+                @can('logs.index')
+                        <li class="nav-item">
+                            <a href="{{ route('logs.index') }}" class="nav-link" target="_blank">
+                                <i class="nav-icon fas fa-bug"></i>
+                                <p>Logs</p>
+                            </a>
+                        </li>
+                @endcan
                 <li class="nav-item">
                     <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="nav-link">
                         <i class="nav-icon fas fa-power-off text-red"></i>

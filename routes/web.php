@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth', 'prefix' => 'dashboard'], function () {
     Route::get('/ajax-data-loader', [DashboardController::class, 'ajaxDashboardLoader'])->name('backoffice.ajaxDashboardLoader');
 
     Route::middleware('checkPermissions')->group(function(){
+        Route::get('logs', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index'])->name('logs.index');
         Route::group(['prefix' => 'users', 'as'=>'users.'], function () {
             Route::get('/', [UserController::class, 'index'])->name('index');
             Route::get('/create', [UserController::class, 'create'])->name('create');
