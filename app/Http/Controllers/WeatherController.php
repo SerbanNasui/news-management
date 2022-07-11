@@ -55,7 +55,7 @@ class WeatherController extends Controller
     }
 
     public function destroy($id){
-        $weather = Weather::find($id);
+        $weather = Weather::withTrashed()->find($id);
         $weather->forceDelete();
         toastr()->success('City deleted successfully!');
         return redirect()->back();
